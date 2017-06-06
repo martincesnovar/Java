@@ -12,15 +12,17 @@ import java.awt.geom.Path2D;
 public class Lomljenka {
 	private Path2D lomljenka;
 	private Color barva;
+	private int debelina;
 	/**
 	 * Nova lomljena crta z danima začetnima koordinatama.
 	 * @param x
 	 * @param y
 	 */
-	public Lomljenka(int x, int y, Color barva) {
+	public Lomljenka(int x, int y, Color barva, int debelina) {
 		this.lomljenka = new Path2D.Float();
 		this.lomljenka.moveTo(x, y);
 		this.barva = barva;
+		this.debelina = debelina;
 	}
 	
 	/**
@@ -39,7 +41,7 @@ public class Lomljenka {
 	 * @param g
 	 */
 	public void narisi(Graphics2D g) {
-		g.setStroke(new BasicStroke(5));
+		g.setStroke(new BasicStroke(debelina));
 		g.setColor(barva);
 		g.draw(lomljenka);
 	}

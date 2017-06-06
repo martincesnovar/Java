@@ -9,6 +9,9 @@ import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JSpinner;
 import javax.swing.JToolBar;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * Preprost program za risanje slikic.
@@ -16,7 +19,7 @@ import javax.swing.JToolBar;
  * @author andrej
  *
  */
-public class Slikarija extends JFrame implements ActionListener {
+public class Slikarija extends JFrame implements ActionListener, ChangeListener {
 	public static Object izbranaBarva;
 	private JButton zbrisiGumb;
 	private JButton barvaGumb;
@@ -60,8 +63,8 @@ public class Slikarija extends JFrame implements ActionListener {
 		pobarvajBarvaGumb(platno.izbranaBarva);
 		
 		//Nastavljanje debeline
-		spin = new JSpinner();
-		//debelina.addActionListener(this);
+		spin = new JSpinner(new SpinnerNumberModel(platno.debelina, 1, 100, 1));
+		spin.addChangeListener(this);
 		toolBar.add(spin);
 	}
 
@@ -90,7 +93,7 @@ public class Slikarija extends JFrame implements ActionListener {
 			if (izbranaBarva!=null) {
 			pobarvajBarvaGumb(izbranaBarva);
 			platno.izbranaBarva = izbranaBarva; 
-		}
+			}
 		}
 
 	}
@@ -99,5 +102,11 @@ public class Slikarija extends JFrame implements ActionListener {
 		Slikarija okno = new Slikarija();
 		okno.pack();
 		okno.setVisible(true);
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent arg0) {
+		platno.debelina = (int) spin.getValue();
+		
 	}
 }

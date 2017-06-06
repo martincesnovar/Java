@@ -28,6 +28,7 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 	 */
 	private Lomljenka trenutnaCrta;
 	protected Color izbranaBarva;
+	protected int debelina;
 	
 	public Platno() {
 		super(); //pokli�i konstruktor
@@ -37,6 +38,7 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 		addMouseListener(this);
 		addMouseMotionListener(this);
 		izbranaBarva = Color.BLUE;
+		debelina = 5;
 	}
 	
 	@Override
@@ -89,7 +91,7 @@ public class Platno extends JPanel implements MouseListener, MouseMotionListener
 	public void mouseDragged(MouseEvent e) {
 		if (trenutnaCrta == null) {
 			// nimam trenutne čte, zato jo naredimo
-			trenutnaCrta = new Lomljenka(e.getX(), e.getY(), izbranaBarva);
+			trenutnaCrta = new Lomljenka(e.getX(), e.getY(), izbranaBarva, debelina);
 		} else {
 			// trenutno črto že imamo, zato ji dodamo točko
 			trenutnaCrta.dodajTocko(e.getX(), e.getY());
